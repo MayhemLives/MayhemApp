@@ -51,27 +51,27 @@ const tables = {
     "If you liked it, you should\u2019ve counterspelled it."
   ],
   "wildMagic": [
-    "You swap bodies with the nearest ferret.",
-    "Everything turns polka-dot for 1d4 hours.",
-    "You summon a mariachi band that follows you around.",
-    "Your voice echoes like you're in a cavern.",
-    "You sneeze and cast Fireball centered on yourself.",
-    "You grow a long, silken wizard beard. It grants no power.",
-    "Gravity is now optional for your pants.",
-    "You shout 'BANG!' and a firework goes off\u2026 somewhere.",
-    "You glow like a disco ball in combat.",
-    "For the next minute, you must narrate your actions in rhyme.",
-    "Your next spell is accompanied by a kazoo orchestra.",
-    "All beverages within 30 feet turn into soda.",
-    "You briefly become a cartoon version of yourself.",
-    "You become magnetic, but only to forks and spoons.",
-    "Everyone sees your childhood imaginary friend.",
-    "Roll again. But louder.",
-    "You\u2019re stuck singing everything you say for the next 10 minutes.",
-    "Your shadow detaches and starts mimicking others.",
-    "You get a theme song for 1d4 rounds. It\u2019s loud.",
-    "You smell like victory. And bubblegum."
-  ],
+  ["You swap bodies with the nearest ferret.", 1],
+  ["Everything turns polka-dot for 1d4 hours.", 2],
+  ["You summon a mariachi band that follows you around.", 3],
+  ["Your voice echoes like you're in a cavern.", 1],
+  ["You sneeze and cast Fireball centered on yourself.", 3],
+  ["You grow a long, silken wizard beard. It grants no power.", 1],
+  ["Gravity is now optional for your pants.", 2],
+  ["You shout 'BANG!' and a firework goes off… somewhere.", 2],
+  ["You glow like a disco ball in combat.", 2],
+  ["For the next minute, you must narrate your actions in rhyme.", 2],
+  ["Your next spell is accompanied by a kazoo orchestra.", 3],
+  ["All beverages within 30 feet turn into soda.", 1],
+  ["You briefly become a cartoon version of yourself.", 2],
+  ["You become magnetic, but only to forks and spoons.", 2],
+  ["Everyone sees your childhood imaginary friend.", 3],
+  ["Roll again. But louder.", 1],
+  ["You’re stuck singing everything you say for the next 10 minutes.", 3],
+  ["Your shadow detaches and starts mimicking others.", 2],
+  ["You get a theme song for 1d4 rounds. It’s loud.", 3],
+  ["You smell like victory. And bubblegum.", 1]
+],
   "disasterSeverity": [
   ["Mildly inconvenient: A shoe flies off.", 1],
   ["Someone’s hat catches fire, but it’s fine.", 1],
@@ -138,7 +138,7 @@ function rollTable() {
   let result;
   let text, score;
 
-  if (select === "disasterSeverity") {
+  if (select === "disasterSeverity" || select === "wildMagic") {
     do {
       result = results[Math.floor(Math.random() * results.length)];
       text = result[0];

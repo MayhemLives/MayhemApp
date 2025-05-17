@@ -161,7 +161,7 @@ function rollTable() {
 
   
   }
-
+}
 
 function updateScore(delta) {
   score += delta;

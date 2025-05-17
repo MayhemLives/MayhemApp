@@ -159,7 +159,11 @@ function rollTable() {
     logHistory("Rolled from " + select, result);
   }
 
-  
+  if (document.getElementById('toggle-sound')?.checked) {
+    const sfx = document.getElementById('sfx-roll');
+    if (sfx && typeof sfx.play === "function") {
+      sfx.play().catch(() => {});
+    }
   }
 }
 

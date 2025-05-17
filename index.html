@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <title>Mayhem Tables</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mayhem">
+  <link rel="apple-touch-icon" href="icon.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("Service Worker Registered"))
+        .catch(err => console.error("Service Worker registration failed:", err));
+    }
+  </script>
 </head>
 <body>
   <h1>Roll for Mayhem</h1>
@@ -43,7 +54,7 @@
     <button onclick="exportHistory()">📄 Export History</button>
   </div>
 
-  <audio id="sfx-roll" src="roll.wav" preload="auto"></audio>
+  
   <script src="app.js"></script>
 </body>
 </html>

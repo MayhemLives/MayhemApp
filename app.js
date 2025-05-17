@@ -51,49 +51,49 @@ const tables = {
     "If you liked it, you should\u2019ve counterspelled it."
   ],
   "wildMagic": [
-    "You swap bodies with the nearest ferret.",
-    "Everything turns polka-dot for 1d4 hours.",
-    "You summon a mariachi band that follows you around.",
-    "Your voice echoes like you're in a cavern.",
-    "You sneeze and cast Fireball centered on yourself.",
-    "You grow a long, silken wizard beard. It grants no power.",
-    "Gravity is now optional for your pants.",
-    "You shout 'BANG!' and a firework goes off\u2026 somewhere.",
-    "You glow like a disco ball in combat.",
-    "For the next minute, you must narrate your actions in rhyme.",
-    "Your next spell is accompanied by a kazoo orchestra.",
-    "All beverages within 30 feet turn into soda.",
-    "You briefly become a cartoon version of yourself.",
-    "You become magnetic, but only to forks and spoons.",
-    "Everyone sees your childhood imaginary friend.",
-    "Roll again. But louder.",
-    "You\u2019re stuck singing everything you say for the next 10 minutes.",
-    "Your shadow detaches and starts mimicking others.",
-    "You get a theme song for 1d4 rounds. It\u2019s loud.",
-    "You smell like victory. And bubblegum."
-  ],
+  ["You swap bodies with the nearest ferret.", 1],
+  ["Everything turns polka-dot for 1d4 hours.", 2],
+  ["You summon a mariachi band that follows you around.", 3],
+  ["Your voice echoes like you're in a cavern.", 1],
+  ["You sneeze and cast Fireball centered on yourself.", 3],
+  ["You grow a long, silken wizard beard. It grants no power.", 1],
+  ["Gravity is now optional for your pants.", 2],
+  ["You shout 'BANG!' and a firework goes off… somewhere.", 2],
+  ["You glow like a disco ball in combat.", 2],
+  ["For the next minute, you must narrate your actions in rhyme.", 2],
+  ["Your next spell is accompanied by a kazoo orchestra.", 3],
+  ["All beverages within 30 feet turn into soda.", 1],
+  ["You briefly become a cartoon version of yourself.", 2],
+  ["You become magnetic, but only to forks and spoons.", 2],
+  ["Everyone sees your childhood imaginary friend.", 3],
+  ["Roll again. But louder.", 1],
+  ["You’re stuck singing everything you say for the next 10 minutes.", 3],
+  ["Your shadow detaches and starts mimicking others.", 2],
+  ["You get a theme song for 1d4 rounds. It’s loud.", 3],
+  ["You smell like victory. And bubblegum.", 1]
+],
   "disasterSeverity": [
-    "Mildly inconvenient: A shoe flies off.",
-    "Someone\u2019s hat catches fire, but it\u2019s fine.",
-    "You trip, but make it look intentional.",
-    "Awkward silence. And then a loud crash.",
-    "Moderate disruption: A table flips.",
-    "Spilled drinks everywhere\u2014someone screams.",
-    "Something explodes. No one knows why.",
-    "A rival shows up mid-battle.",
-    "You accidentally summon a goat. It\u2019s angry.",
-    "Chaotic mess: Your loot is now cursed.",
-    "A storm begins inside the tavern.",
-    "All lights dim. A disembodied laugh echoes.",
-    "A wall collapses, revealing\u2026 another wall.",
-    "Someone starts a slow clap. No one joins in.",
-    "You turn invisible, but only from yourself.",
-    "Total catastrophe: An elder god appears. Hungry.",
-    "Reality wavers. Roll to resist becoming a musical.",
-    "You fall through the floor\u2014into another campaign setting.",
-    "The villain monologues. You\u2019re in the splash zone.",
-    "You win initiative but forget what you were doing."
-  ],
+  ["Mildly inconvenient: A shoe flies off.", 1],
+  ["Someone’s hat catches fire, but it’s fine.", 1],
+  ["You trip, but make it look intentional.", 1],
+  ["Awkward silence. And then a loud crash.", 1],
+  ["Moderate disruption: A table flips.", 2],
+  ["Spilled drinks everywhere—someone screams.", 2],
+  ["Something explodes. No one knows why.", 2],
+  ["A rival shows up mid-battle.", 2],
+  ["You accidentally summon a goat. It’s angry.", 2],
+  ["Chaotic mess: Your loot is now cursed.", 2],
+  ["A storm begins inside the tavern.", 2],
+  ["All lights dim. A disembodied laugh echoes.", 2],
+  ["A wall collapses, revealing… another wall.", 1],
+  ["Someone starts a slow clap. No one joins in.", 1],
+  ["You turn invisible, but only from yourself.", 2],
+  ["Total catastrophe: An elder god appears. Hungry.", 3],
+  ["Reality wavers. Roll to resist becoming a musical.", 3],
+  ["You fall through the floor—into another campaign setting.", 3],
+  ["The villain monologues. You’re in the splash zone.", 3],
+  ["You win initiative but forget what you were doing.", 2]
+],
   "introLines": [
     "I'm a slippery floor in a tavern brawl.",
     "I'm the wind that blows your skirt up mid-duel.",
@@ -135,16 +135,31 @@ function rollTable() {
   const select = document.getElementById("table-select").value;
   const results = tables[select];
   let attempts = 0;
-  let random;
-  do {
-    random = results[Math.floor(Math.random() * results.length)];
-    attempts++;
-  } while (random === lastResult && attempts < 10);
-  lastResult = random;
-  document.getElementById("result").textContent = random;
-  logHistory("Rolled from " + select, random);
-  if (document.getElementById('toggle-sound').checked) {
-    document.getElementById('sfx-roll').play();
+  let result;
+  let text, score;
+
+  if (select === "disasterSeverity" || select === "wildMagic") {
+    do {
+      result = results[Math.floor(Math.random() * results.length)];
+      text = result[0];
+      score = result[1];
+      attempts++;
+    } while (text === lastResults[select] && attempts < 10);
+    lastResults[select] = text;
+    document.getElementById("result").textContent = text;
+    updateScore(score);
+    logHistory("Rolled from " + select, text);
+  } else {
+    do {
+      result = results[Math.floor(Math.random() * results.length)];
+      attempts++;
+    } while (result === lastResults[select] && attempts < 10);
+    lastResults[select] = result;
+    document.getElementById("result").textContent = result;
+    logHistory("Rolled from " + select, result);
+  }
+
+  
   }
 }
 

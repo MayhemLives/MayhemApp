@@ -1,0 +1,53 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  margin: 0;
+}
+button {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: crimson;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+#result {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.score-controls {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+#chaos-meter-container {
+  position: relative;
+  background: #333;
+  height: 2rem;
+  width: 80%;
+  margin: 2rem auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#chaos-meter-fill {
+  background: limegreen;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+#chaos-meter-label {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  line-height: 2rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}

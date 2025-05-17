@@ -137,7 +137,22 @@ function rollTable() {
   let attempts = 0;
   let random;
   do {
-    random = results[Math.floor(Math.random() * results.length)];
+    if (select === "disasterSeverity") {
+    let pair;
+    do {
+      pair = results[Math.floor(Math.random() * results.length)];
+    } while (pair[0] === lastResults[select] && attempts < 10);
+    random = pair[0];
+    lastResults[select] = random;
+    logHistory("Rolled from " + select, random);
+    updateScore(pair[1]);
+  } else {
+    do {
+      random = results[Math.floor(Math.random() * results.length)];
+    } while (random === lastResults[select] && attempts < 10);
+    lastResults[select] = random;
+    logHistory("Rolled from " + select, random);
+  }
     attempts++;
   } while (random === lastResult && attempts < 10);
   lastResult = random;
